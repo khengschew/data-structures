@@ -10,7 +10,7 @@ class Stack {
   }
 
   pop() {
-    var tempVal = this.storage[this.size() - 1];
+    let tempVal = this.storage[this.size() - 1];
     delete this.storage[this.size() - 1];
 
     return tempVal;

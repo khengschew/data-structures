@@ -10,11 +10,11 @@ class Queue {
   }
 
   dequeue() {
-    var tempVal = this.storage[0];
-    var tempSize = this.size();
+    let tempVal = this.storage[0];
+    let tempSize = this.size();
 
     delete this.storage[0];
-    for (var key in this.storage) {
+    for (let key in this.storage) {
       this.storage[key - 1] = this.storage[key];
     }
     delete this.storage[tempSize - 1];
