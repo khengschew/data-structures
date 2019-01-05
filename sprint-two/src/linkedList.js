@@ -5,6 +5,7 @@ var LinkedList = function() {
 
   list.addToTail = function(value) {
     // Input : a data point
+    // Time : O(1)
     if (list.head === null && list.tail === null) {
       list.head = Node(value);
       list.tail = list.head;
@@ -19,6 +20,7 @@ var LinkedList = function() {
     // Input : none
     // Ouput : removed head node value
     // Edge Cases : list.head is null, or list.head = list.tail
+    // Time : O(1)
 
     if (list.head === null) {
       return null;
@@ -38,9 +40,8 @@ var LinkedList = function() {
 
   list.contains = function(target) {
     // Input : target value
-    // Ouput
-    // Constraints
-    // Edge Cases
+    // Ouput : boolean
+    // Time : O(n)
 
     var curr = list.head;
     while (curr !== null) {
