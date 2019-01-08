@@ -68,4 +68,39 @@ describe('graph', function() {
     expect(graph.hasEdge(3, 5)).to.equal(true);
     expect(graph.hasEdge(5, 5)).to.equal(true);
   });
+
+  xit('should allow node value replacement', function() {
+
+  });
+
+  it('should function end-to-end', function() {
+    for (var i = 0; i < 30; i++) {
+      graph.addNode(i);
+      expect(graph.contains(i)).to.equal(true);
+
+      graph.addEdge(i, (i + 1) % 30);
+      graph.addEdge(i, (i + 2) % 30);
+      expect(graph.hasEdge(i, (i + 1) % 30)).to.equal(true);
+      expect(graph.hasEdge(i, (i + 2) % 30)).to.equal(true);
+    }
+    // removeEdge
+    for (var i = 0; i < 30; i += 5) {
+      graph.removeEdge((i + 1) % 30, i);
+      expect(graph.hasEdge(i, (i + 1) % 30)).to.equal(false);
+      expect(graph.hasEdge(i, (i + 2) % 30)).to.equal(true);
+    }
+
+    // // removeNode
+    for (var i = 0; i < 30; i += 2) {
+      graph.removeNode(i);
+      expect(graph.contains(i)).to.equal(false);
+      expect(graph.hasEdge(i, (i + 1) % 30)).to.equal(false);
+      expect(graph.hasEdge(i, (i + 2) % 30)).to.equal(false);
+    }
+
+    // // forEachNode
+    graph.forEachNode(function(node) {
+      expect(node % 2 !== 0).to.equal(true);
+    });
+  });
 });
