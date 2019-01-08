@@ -12,7 +12,7 @@ HashTable.prototype.capacity = function() {
 };
 
 HashTable.prototype.needsResize = function() {
-  if (this._size < 6) { // table will never be resized when less than 6
+  if (this._size <= 2) { // table will never be resized when less than or equal 2
     return false;
   }
 
@@ -124,11 +124,13 @@ HashTable.prototype.resizeTable = function() {
       Get new index for bucket key
       Add to new storage at new index
     */
-    for (var [storedKey, storedValue] of bucket) {
-      var index = getIndexBelowMaxForKey(storedKey, this._limit);
-      this._insert(index, [storedKey, storedValue]);
+    if (bucket) {
+      for (var [storedKey, storedValue] of bucket) {
+        var index = getIndexBelowMaxForKey(storedKey, this._limit);
+        this._insert(index, [storedKey, storedValue]);
+      }
     }
-  });
+  }.bind(this));
 };
 
 
