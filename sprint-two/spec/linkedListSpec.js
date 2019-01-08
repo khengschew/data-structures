@@ -51,5 +51,18 @@ describe('linkedList', function() {
     expect(linkedList.contains(4)).to.equal(false);
   });
 
+  it('should handle duplicate values', function() {
+    linkedList.addToTail(4);
+    linkedList.addToTail(3);
+    linkedList.addToTail(5);
+    linkedList.addToTail(1);
+    expect(linkedList.contains(4)).to.equal(true);
+
+    linkedList.addToTail(4);
+    expect(linkedList.contains(4)).to.equal(true);
+
+    linkedList.removeHead();
+    expect(linkedList.contains(4)).to.equal(true);    
+  });
   // add more tests here to test the functionality of linkedList
 });

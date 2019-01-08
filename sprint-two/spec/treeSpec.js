@@ -41,4 +41,14 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should function end-to-end', function() {
+    for (var i = 0; i < 10; i++) {
+      tree.addChild(i);
+      tree.children[i].addChild(i + 10);
+      tree.children[i].children[0].addChild(i + 20);
+    }
+    for (var i = 0; i < 30; i++) {
+      expect(tree.contains(i)).to.equal(true);
+    }
+  });
 });
