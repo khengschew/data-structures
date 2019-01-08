@@ -27,6 +27,10 @@ HashTable.prototype.insert = function(k, v) {
   hash key
   push into buckets array
   */
+  this._size++;
+  if (this.needsResize()) {
+    this.resizeTable();
+  }
 
   var index = getIndexBelowMaxForKey(k, this._limit);
 
