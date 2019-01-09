@@ -1,18 +1,54 @@
 var Set = function() {
-  var set = Object.create(setPrototype);
-  set._storage = null; // fix me
+  var set = Object.create(setMethods);
+  // set._storage = []; // fix me
+
+  // Constant time variant
+  set._storage = {};
+
   return set;
 };
 
-var setPrototype = {};
+var setMethods = {};
 
-setPrototype.add = function(item) {
+setMethods.add = function(item) {
+  // // Time: linear, O(n) (contains loops through array)
+  // if (!this.contains(item)) {
+  //   this._storage.push(item);
+  // }
+
+  // Constant time variant
+  var newKey = typeof item + JSON.stringify(item);
+  this._storage[newKey] = true;
+
 };
 
-setPrototype.contains = function(item) {
+setMethods.contains = function(item) {
+  // // Time: linear, O(n)
+  // for (var storedItem of this._storage) {
+  //   if (storedItem === item) {
+  //     return true;
+  //   }
+  // }
+  // return false;
+
+  // Constant time variant
+  var newKey = typeof item + JSON.stringify(item);
+  var storedValue = this._storage[newKey];
+  return storedValue ? storedValue : false;
+
 };
 
-setPrototype.remove = function(item) {
+setMethods.remove = function(item) {
+  // // Time: linear, O(n) (indexOf loops through array)
+  // var index = this._storage.indexOf(item);
+  // if (index !== -1) {
+  //   this._storage.splice(index, 1);
+  // }
+
+  // Constant time variant
+  var newKey = typeof item + JSON.stringify(item);
+  delete this._storage[newKey];
+
 };
 
 /*

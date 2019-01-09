@@ -41,4 +41,31 @@ describe('tree', function() {
     expect(tree.contains(8)).to.equal(true);
   });
 
+  it('should traverse and run callback on each node', function() {
+    tree.addChild(5);
+    tree.addChild(6);
+    tree.children[0].addChild(7);
+    tree.children[1].addChild(8);
+
+    var testValues = [];
+
+    var pushValues = function(x) {
+      testValues.push(x);
+    };
+
+    tree.traverse(pushValues);
+
+    expect(testValues).to.eql([undefined, 5, 7, 6, 8]);
+  });
+
+  it('should function end-to-end', function() {
+    for (var i = 0; i < 10; i++) {
+      tree.addChild(i);
+      tree.children[i].addChild(i + 10);
+      tree.children[i].children[0].addChild(i + 20);
+    }
+    for (var i = 0; i < 30; i++) {
+      expect(tree.contains(i)).to.equal(true);
+    }
+  });
 });
