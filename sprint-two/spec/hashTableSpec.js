@@ -1,7 +1,20 @@
 describe('hashTable', function() {
   var hashTable;
   var people = [['Steven', 'Tyler'], ['George', 'Harrison'], ['Mr.', 'Doob'], ['Dr.', 'Sunshine'], ['John', 'Resig'], ['Brendan', 'Eich'], ['Alan', 'Turing']];
-
+  var peopleLong = [
+    ['Steven', 'Tyler'],
+    ['George', 'Harrison'],
+    ['Mr.', 'Doob'],
+    ['Dr.', 'Sunshine'],
+    ['John', 'Resig'],
+    ['Brendan', 'Eich'],
+    ['Alan', 'Turing'],
+    ['Kheng', 'Chew'],
+    ['Michael', 'Hamm'],
+    ['Mike', 'Harm'],
+    ['Ken', 'Chu'],
+    ['Jimmy', 'Johns']
+  ];
 
   beforeEach(function() {
     hashTable = new HashTable();
@@ -72,5 +85,15 @@ describe('hashTable', function() {
     hashTable.remove('John');
     hashTable.remove('Mr.');
     expect(hashTable._limit).to.equal(8);
+  });
+
+  it ('should double in size when needed x 2', function() {
+    _.each(peopleLong, function(person) {
+      var firstName = person[0];
+      var lastName = person[1];
+      hashTable.insert(firstName, lastName);
+      expect(hashTable.retrieve(firstName)).to.equal(lastName);
+    });
+    expect(hashTable._limit).to.equal(32);
   });
 });

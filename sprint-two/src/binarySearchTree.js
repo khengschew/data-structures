@@ -16,7 +16,7 @@ var objectMethods = {
           return;
         }
         traverse(node.right);
-      } else if (value < node.value) {
+      } else {
         if (node.left === null) {
           node.left = BinarySearchTree(value);
           return;
