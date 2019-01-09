@@ -37,7 +37,20 @@ treeMethods.contains = function(target) {
   return result;
 };
 
+treeMethods.traverse = function(cb) {
+  // Linear, O(n)
+  cb(this.value);
 
+  if (this.children.length <= 0) {
+    // Base case
+    return;
+  } else {
+    // Recursive case
+    for (var child of this.children) {
+      child.traverse(cb);
+    }
+  }
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
